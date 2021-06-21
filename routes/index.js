@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const getAll = require('../querys/getAll');
+const getAll = require('../requests/getAll');
 
 //model
 require('../models/Item');
