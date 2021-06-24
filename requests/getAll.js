@@ -4,7 +4,7 @@ const uri =
 	'mongodb+srv://dbUser:dbUser@clustertea.drysx.mongodb.net/tealist?retryWrites=true&w=majority';
 const client = new MongoClient(uri);
 
-exports.getAll = async (req, res) => {
+exports.getAll = async () => {
 	try {
 		await client.connect();
 		const database = client.db('tealist');
