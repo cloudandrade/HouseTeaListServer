@@ -4,10 +4,6 @@ const mongoose = require('mongoose');
 const { getAll } = require('../requests/getAll');
 const { updateOne } = require('../requests/updateOne');
 
-//model
-require('../models/Item');
-const Item = mongoose.model('item');
-
 router.get('/', async (req, res) => {
 	res.send('tea list server online');
 });

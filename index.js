@@ -1,8 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-//const expressLayouts = require("express-ejs-layouts");
+
 const mongoose = require('mongoose');
-const path = require('path');
+const cors = require('cors');
 
 //EXPRESS
 const app = express();
@@ -13,6 +13,8 @@ const PORT = process.env.PORT || 5000;
 //BODY PARSER
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+server.use(cors());
 
 //ROUTES
 app.use('/', require('./routes/index'));
