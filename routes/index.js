@@ -11,6 +11,7 @@ router.get('/', async (req, res) => {
 
 //get all itens
 router.get('/itens', async (req, res) => {
+	console.log('Buscando Lista de Itens');
 	Item.find({})
 		.sort({ id: 'asc' })
 		.then((lista) => {
@@ -20,8 +21,14 @@ router.get('/itens', async (req, res) => {
 
 //update an iten
 router.put('/itens/:id', async (req, res) => {
+	console.log('Alterando Item');
 	const itemLista = req.body;
 	const id = req.params.id;
+
+	console.log('Id Enviado: ');
+	console.log(id);
+	console.log('Objeto Enviado: ');
+	console.log(itemLista);
 
 	Item.findOne({ _id: id })
 		.then((item) => {
