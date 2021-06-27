@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const { getAll } = require('../requests/getAll');
-const { updateOne } = require('../requests/updateOne');
+
+require('../models/Item'); //importando o model para ser usado
+const Item = mongoose.model('itens'); //passando o valor do model para uma variavel e relacionando a collection
 
 router.get('/', async (req, res) => {
 	res.send('tea list server online');
@@ -10,19 +11,44 @@ router.get('/', async (req, res) => {
 
 //get all itens
 router.get('/itens', async (req, res) => {
-	await getAll()
-		.then((lista) => res.json(lista))
-		.catch((err) => console.log(err));
+	Item.find({})
+		.sort({ id: 'asc' })
+		.then((lista) => {
+			res.json(lista);
+		});
 });
 
 //update an iten
 router.put('/itens/:id', async (req, res) => {
-	const id = req.params.id;
 	const itemLista = req.body;
+	const id = req.params.id;
 
-	updateOne(id, itemLista)
-		.then((result) => res.json(result))
-		.catch((err) => console.log(err));
+	Item.findOne({ _id: id })
+		.then((item) => {
+			if (item) {
+				//criar depois validação da edição
+				item.nome = itemLista.nome;
+				item.checked = itemLista.checked;
+
+				item.save()
+					.then(() => {
+						res.status(200).json({
+							msg: 'editado com sucesso',
+							payload: item,
+						});
+					})
+					.catch((error) => {
+						console.log(error);
+						res.status(500).send(
+							'houve um erro ao editar item da lista: erro: ' + error
+						);
+					});
+			}
+		})
+		.catch((erro) => {
+			console.log(erro);
+			res.send('houve um erro ao buscar item para ediçao: erro: ' + erro);
+		});
 });
 
 module.exports = router;

@@ -34,15 +34,13 @@ mongoose
 //MONGOOSE
 /* mongoose.Promise = global.Promise;
 mongoose
-  .connect("mongodb://localhost/passport", { useNewUrlParser: true })
-  .then(() => {
-    console.log("Mongodb connected...");
-  })
-  .catch(erro => {
-    console.log(
-      "houve um problema ao se conectar ao banco de dados, erro: " + erro
-    );
-  }); */
+	.connect('mongodb://localhost/tealist', { useNewUrlParser: true })
+	.then(() => {
+		console.log('Mongodb connected...');
+	})
+	.catch((erro) => {
+		console.log('houve um problema ao se conectar ao banco de dados, erro: ' + erro);
+	}); */
 
 //SERVER
 app.listen(process.env.port || PORT, console.log(`Server started on port ${PORT}`));

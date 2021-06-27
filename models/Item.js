@@ -17,4 +17,4 @@ const Item = new Schema({
 		type: Boolean,
 	},
 });
-mongoose.model('item', Item);
+mongoose.model('itens', Item);
